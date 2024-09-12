@@ -1,3 +1,5 @@
+<div class="container-fluid d-flex flex-column min-vh-100">
+<header>
 <div class="plastic-film">
   <div class="logo">
     <img src="assets/images/logo.png" alt="Logo du site" class="img-fluid" />
@@ -19,13 +21,13 @@
 <div class="d-flex justify-content-center mb-5 mt-5 text-center">
   <h1>{{ pageTitle }}</h1>
 </div>
+</header>
 
-
-<main>
+<main class="flex-fill">
   <router-outlet></router-outlet>
 </main>
 
-<footer class="container">
+<footer class="bg-transparent-black text-white text-center p-3">
   <div>
     <!-- Icônes -->
     <div class="footer-icons">
@@ -52,4 +54,4 @@
     </div>
   </div>
 </footer>
-
+</div>

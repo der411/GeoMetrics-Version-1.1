@@ -81,9 +81,9 @@
   <div *ngIf="showCarres">
     <!--*ngIf Directive structurelle Angular: pour conditionnellement inclure ou exclure un élement du DOM en fonction d'un boolean -->
     <div class="row">
-      <div *ngFor="let carre of carres" class="col-3">
+      <div *ngFor="let carre of carres" class="col-12 col-md-6 col-lg-4 mb-4">
         <!--*ngFor Directive structurelle Angular:  affiche un élément du DOM pour chaque élément de la collection. -->
-        <div class="mini-container">
+        <div class="mini-container p-3 border rounded">
           <p><Strong>Nom :</Strong> {{ carre.nom }}</p>
           <p><Strong>Couleur :</Strong> {{ carre.couleur }}</p>
           <p><Strong>a :</Strong> {{ carre.cote }} m</p>

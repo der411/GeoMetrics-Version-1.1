@@ -4,8 +4,16 @@ body {
 
 body,
 html {
-  display: flex;
-  flex-direction: column;
   margin: 0;
-  padding: 0;
+  height: 100%;
+}
+
+
+
+.container-fluid {
+  flex: 1; /* Le conteneur principal remplit tout l'espace disponible */
+}
+
+main {
+  flex: 1; /* Le main prendra tout l'espace restant */
 }

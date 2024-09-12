@@ -1,7 +1,8 @@
 .plastic-film {
   background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond noire avec 50% de transparence */
   backdrop-filter: blur(4px); /* Floute l'arrière-plan derrière le film plastique */
-  border-radius: 10px; /* Coins arrondis pour un effet plus doux */
+  border-bottom-left-radius: 10px; /* Coins arrondis pour un effet plus doux */
+  border-bottom-right-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), /* Ombre externe subtile */
               inset 0 -3px 8px rgba(255, 255, 255, 0.1); /* Ombre interne pour simuler la profondeur */
   padding: 20px; /* Espacement interne */
@@ -64,7 +65,7 @@
 /* CSS pour le footer */
 footer {
   position: relative;
-  margin-top: 200px;
+  margin-top: 100px;
   background-color: #3d3d3d;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -103,5 +104,15 @@ footer {
   color: white;
   margin: 5px 0; /* Ajouter un espacement vertical entre les liens */
 }
+
+.bg-transparent-black {
+  background-color: rgba(0, 0, 0, 0.8); /* Noir avec 80% d'opacité */
+  color: white; /* Texte en blanc pour un bon contraste */
+  padding: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  text-align: center;
+}
+
 
 
