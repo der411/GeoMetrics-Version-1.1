@@ -1,0 +1,239 @@
+<!-------------------------------------------Navigateur------------------------------------------------>
+<div class="nav row">
+  <div class="text-center mb-2 link-2d">
+    <a routerLink="/forme2d"><b>2 D</b></a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cube">Cube</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cylindre">Cylindre</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cone">Cone</a>
+  </div>
+</div>
+
+<!--------------------------------------------Calculer-------------------------------------------------->
+<div class="container container-calcul">
+  <div class="row">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center container-fluid">
+      <div class="form-link col-2"><a href="https://fr.wikipedia.org/wiki/Sph%C3%A8re" target="_blank"><img src="assets/images/loupe.png" alt="lien wikipédia" class="img-fluid"></a>
+      </div>
+      <div>
+        <img src="assets/images/7.png" alt="sphere" class="img-fluid mt-3" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="sphere-calcul">
+        <!-- Nom -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="nom" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Couleur -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="couleur" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Rayon -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Rayon</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="rayon" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Résultats du calcul -->
+        <div class="calcul-result">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-8 m-2">
+              <strong>Surface</strong> {{ (4 * PI * rayon * rayon).toFixed(2) }} m<sup>2</sup>
+            </div>
+            <div class="col-12 col-lg-8 mb-3">
+              <strong>Volume</strong> {{ ((4/3) * PI * rayon * rayon * rayon).toFixed(2) }} m<sup>3</sup>
+            </div>
+            <div class="col-12 col-lg-8">
+              <button class="btn btn-primary" (click)="calculer()">Calculer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------Lecture des sphères existantes----------------------------------->
+<div class="container-calcul">
+  <h2>Voir les sphères existantes</h2>
+  <button class="btn btn-primary" (click)="toggleSpheres()">
+    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span>
+  </button>
+  <div *ngIf="showSpheres">
+    <div class="row">
+      <div *ngFor="let sphere of spheres" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container-sphere p-3 border rounded">
+          <p><strong>Nom :</strong> {{ sphere.nom }}</p>
+          <p><strong>Couleur :</strong> {{ sphere.couleur }}</p>
+          <p><strong>Rayon :</strong> {{ sphere.rayon }} m</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-calcul">
+  <div class="row">
+    <!---------------------------------- Modifier une sphère ------------------------------------------->
+    <div class="col-12 col-md-6 mb-4">
+      <h2 class="text-center">Modifier une sphère</h2>
+      <form (ngSubmit)="updateSphere()">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2 mt-3">
+            <label for="id">Id</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-6 mt-3">
+            <select [(ngModel)]="selectedSphereId" name="sphereId" class="form-control" (change)="onIdChange()" required>
+              <option *ngFor="let sphere of spheres" [value]="sphere.id">
+                {{ sphere.id }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="rayon">Rayon</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+        </div>
+      </form>
+    </div>
+
+    <!---------------------------- Rechercher une sphère à partir de son ID ---------------------------->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <h2 class="text-center w-100">Recherche par ID</h2>
+        <div class="input-group w-50 mt-3 mx-auto">
+          <select class="form-control" [(ngModel)]="selectedSphereId" (change)="getSphereById(selectedSphereId)">
+            <option *ngFor="let sphere of spheres" [value]="sphere.id">
+              {{ sphere.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section pour afficher les détails de la sphère recherchée -->
+      <div *ngIf="sphere" class="mt-3">
+        <div class="mini-card-sphere p-3 border rounded">
+          <p><strong>Nom :</strong> {{ sphere.nom }}</p>
+          <p><strong>Couleur :</strong> {{ sphere.couleur }}</p>
+          <p><strong>Rayon :</strong> {{ sphere.rayon }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ 4 * PI * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Volume :</strong>
+            {{ (4 / 3) * PI * sphere.rayon * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>3</sup>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------Ajouter une sphère----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter une sphère</h2>
+      <form (ngSubmit)="addSphere(nom, couleur, rayon)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="rayon">Rayon</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!------------------------------Liste de toutes les sphères avec bouton supprimer---------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container-sphere"><i class="bi bi-trash-fill"></i> Liste des Sphères</h2>
+    <div class="row">
+      <div *ngFor="let sphere of spheres" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container-sphere p-3 border rounded">
+          <p><strong>Nom :</strong> {{ sphere.nom }}</p>
+          <p><strong>Couleur :</strong> {{ sphere.couleur }}</p>
+          <p><strong>Rayon :</strong> {{ sphere.rayon }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ 4 * PI * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Volume :</strong>
+            {{ (4 / 3) * PI * sphere.rayon * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>3</sup>
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteSphere(sphere)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

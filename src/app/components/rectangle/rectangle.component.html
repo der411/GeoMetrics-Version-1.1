@@ -1,0 +1,342 @@
+<!------------------------------------------Navigateur------------------------------------------------>
+<div class="nav row">
+  <div class="text-center mb-2 link-3d">
+    <a routerLink="/forme3d"><b>3 D</b></a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/carre">Carré</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/triangle">Triangle</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/losange">Losange</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cercle">Cercle</a>
+  </div>
+</div>
+
+<!------------------------------------------Calculer-------------------------------------------------->
+<div class="container container-calcul">
+  <div class="row">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+      <div class="form-link col-2">
+        <a href="https://fr.wikipedia.org/wiki/Rectangle" target="_blank">
+          <img src="assets/images/loupe.png" alt="lien wikipédia" class="img-fluid">
+        </a>
+      </div>
+      <div>
+        <img src="assets/images/5.png" alt="rectangle" class="img-fluid mt-3" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="rectangle-calcul">
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="nom" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="couleur" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Longueur (L)</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="longueur" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Largeur (l)</div>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input [(ngModel)]="largeur" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <div class="calcul-result">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-8 m-2">
+              <strong>Surface</strong> {{ surface.toFixed(2) }} m<sup>2</sup>
+            </div>
+            <div class="col-12 col-lg-8 mb-3">
+              <strong>Périmètre</strong> {{ perimetre.toFixed(2) }} m
+            </div>
+            <div class="col-12 col-lg-8">
+              <button class="btn btn-primary" (click)="calculer()">Calculer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------------------------Lecture des rectangles existants----------------------------------->
+<div class="container-calcul">
+  <h2>Voir les rectangles existants</h2>
+  <button class="btn btn-primary" (click)="toggleRectangles()">
+    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span>
+  </button>
+  <div *ngIf="showRectangles">
+    <div class="row">
+      <div *ngFor="let rectangle of rectangles" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ rectangle.nom }}</p>
+          <p><strong>Couleur :</strong> {{ rectangle.couleur }}</p>
+          <p><strong>Longueur :</strong> {{ rectangle.longueur }} m</p>
+          <p><strong>Largeur :</strong> {{ rectangle.largeur }} m</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-calcul">
+  <div class="row">
+    <!---------------------------------- Modifier un rectangle---------------------------------------------->
+    <div class="col-12 col-md-6 mb-4">
+      <h2 class="text-center">Modifier un rectangle</h2>
+      <form (ngSubmit)="updateRectangle()">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2 mt-3">
+            <label for="id">Id</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-6 mt-3">
+            <select
+              [(ngModel)]="selectedRectangleId"
+              name="rectangleId"
+              class="form-control"
+              (change)="onIdChange()"
+              required
+            >
+              <option *ngFor="let rectangle of rectangles" [value]="rectangle.id">
+                {{ rectangle.id }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="text"
+              id="nom"
+              [(ngModel)]="nom"
+              name="nom"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="text"
+              id="couleur"
+              [(ngModel)]="couleur"
+              name="couleur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="longueur">Longueur (L)</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="number"
+              min="0"
+              id="longueur"
+              [(ngModel)]="longueur"
+              name="longueur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="largeur">Largeur (l)</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="number"
+              min="0"
+              id="largeur"
+              [(ngModel)]="largeur"
+              name="largeur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+        </div>
+      </form>
+    </div>
+
+    <!---------------------------- Rechercher un rectangle à partir de son ID---------------------------->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <h2 class="text-center w-100">Recherche par ID</h2>
+        <div class="input-group w-50 mt-3 mx-auto">
+          <select
+            class="form-control"
+            [(ngModel)]="selectedRectangleId"
+            (change)="getRectangleById(selectedRectangleId)"
+          >
+            <option *ngFor="let rectangle of rectangles" [value]="rectangle.id">
+              {{ rectangle.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section pour afficher les détails du rectangle recherché -->
+      <div *ngIf="rectangle" class="mt-3">
+        <div class="mini-card p-3 border rounded">
+          <p><strong>Nom :</strong> {{ rectangle.nom }}</p>
+          <p><strong>Couleur :</strong> {{ rectangle.couleur }}</p>
+          <p><strong>Longueur :</strong> {{ rectangle.longueur }} m</p>
+          <p><strong>Largeur :</strong> {{ rectangle.largeur }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ rectangle.longueur * rectangle.largeur | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Périmètre :</strong>
+            {{ 2 * (rectangle.longueur + rectangle.largeur) | number : "1.2-2" }} m
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----------------------------------------Ajouter un rectangle----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter un rectangle</h2>
+      <form (ngSubmit)="addRectangle(nom, couleur, longueur, largeur)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="nom"
+              [(ngModel)]="nom"
+              name="nom"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="couleur"
+              [(ngModel)]="couleur"
+              name="couleur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="longueur">Longueur (L)</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="longueur"
+              [(ngModel)]="longueur"
+              name="longueur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="largeur">Largeur (l)</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="largeur"
+              [(ngModel)]="largeur"
+              name="largeur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!----------------------------------Liste de tous les rectangles----------------------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container">
+      <i class="bi bi-trash-fill"></i> Liste des Rectangles
+    </h2>
+    <div class="row">
+      <div *ngFor="let rectangle of rectangles" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ rectangle.nom }}</p>
+          <p><strong>Couleur :</strong> {{ rectangle.couleur }}</p>
+          <p><strong>Longueur :</strong> {{ rectangle.longueur }} m</p>
+          <p><strong>Largeur :</strong> {{ rectangle.largeur }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ rectangle.longueur * rectangle.largeur | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Périmètre :</strong>
+            {{ 2 * (rectangle.longueur + rectangle.largeur) | number : "1.2-2" }} m
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteRectangle(rectangle)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

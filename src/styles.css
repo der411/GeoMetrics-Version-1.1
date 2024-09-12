@@ -1,0 +1,11 @@
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+body,
+html {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}

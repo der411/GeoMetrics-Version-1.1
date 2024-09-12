@@ -1,0 +1,288 @@
+<!-------------------------------------------Navigateur------------------------------------------------>
+<div class="nav row">
+  <div class="text-center mb-2 link-2d">
+    <a routerLink="/forme2d"><b>2 D</b></a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cube">Cube</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cylindre">Cylindre</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/sphere">Sphère</a>
+  </div>
+</div>
+
+<!--------------------------------------------Calculer-------------------------------------------------->
+<div class="container container-calcul">
+  <div class="row">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center container-fluid">
+      <div class="form-link col-2">
+        <a href="https://fr.wikipedia.org/wiki/C%C3%B4ne_(g%C3%A9om%C3%A9trie)" target="_blank">
+          <img src="assets/images/loupe.png" alt="lien wikipédia" class="img-fluid">
+        </a>
+      </div>
+      <div>
+        <img src="assets/images/9.png" alt="cone" class="img-fluid mt-3" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="carre-calcul">
+        <!-- Nom -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="nom1" class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="nom1" [(ngModel)]="nom" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Couleur -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="couleur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="couleur1" [(ngModel)]="couleur" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Hauteur -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="hauteur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Hauteur</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="hauteur1" [(ngModel)]="hauteur" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Rayon -->
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="rayon1" class="col-12 col-sm-4 col-md-3 col-lg-2">Rayon</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="rayon1" [(ngModel)]="rayon" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <!-- Résultats du calcul -->
+        <div class="calcul-result">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-8 m-2">
+              <strong>Surface</strong> {{ surface.toFixed(2) }} m<sup>2</sup>
+            </div>
+            <div class="col-12 col-lg-8 mb-3">
+              <strong>Volume</strong> {{ volume.toFixed(2) }} m<sup>3</sup>
+            </div>
+            <div class="col-12 col-lg-8">
+              <button class="btn btn-primary" (click)="calculer()">Calculer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------Lecture des cones existants----------------------------------->
+<div class="container-calcul">
+  <h2>Voir les cones existants</h2>
+  <button class="btn btn-primary" (click)="toggleCones()">
+    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span>
+  </button>
+  <div *ngIf="showCones">
+    <div class="row">
+      <div *ngFor="let cone of cones" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ cone.nom }}</p>
+          <p><strong>Couleur :</strong> {{ cone.couleur }}</p>
+          <p><strong>Hauteur :</strong> {{ cone.hauteur }} m</p>
+          <p><strong>Rayon :</strong> {{ cone.rayon }} m</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-calcul">
+  <div class="row">
+    <!---------------------------------- Modifier un cone ------------------------------------------->
+    <div class="col-12 col-md-6 mb-4">
+      <h2 class="text-center">Modifier un cone</h2>
+      <form (ngSubmit)="updateCone()">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2 mt-3">
+            <label for="id">Id</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-6 mt-3">
+            <select id="id" [(ngModel)]="selectedConeId" name="coneId" class="form-control" (change)="onIdChange()" required>
+              <option *ngFor="let cone of cones" [value]="cone.id">
+                {{ cone.id }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="nom2">Nom</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="text" id="nom2" [(ngModel)]="nom" name="nom" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="couleur2">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="text" id="couleur2" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="hauteur2">Hauteur</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="number" min="0" id="hauteur2" [(ngModel)]="hauteur" name="hauteur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="rayon2">Rayon</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input type="number" min="0" id="rayon2" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+        </div>
+      </form>
+    </div>
+
+    <!---------------------------- Rechercher un Cone à partir de son ID ---------------------------->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <label for="selectedConeId" class="text-center w-100">Sélectionnez un Cône</label>
+        <div class="input-group w-50 mt-3 mx-auto">
+          <select id="selectedConeId" class="form-control" [(ngModel)]="selectedConeId" (change)="getConeById(selectedConeId)">
+            <option *ngFor="let cone of cones" [value]="cone.id">
+              {{ cone.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section pour afficher les détails du cone recherché -->
+      <div *ngIf="cone" class="mt-3">
+        <div class="mini-card p-3 border rounded">
+          <p><strong>Nom :</strong> {{ cone.nom }}</p>
+          <p><strong>Couleur :</strong> {{ cone.couleur }}</p>
+          <p><strong>Hauteur :</strong> {{ cone.hauteur }} m</p>
+          <p><strong>Rayon :</strong> {{ cone.rayon }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{
+              PI * cone.rayon * (cone.rayon + RC(cone.rayon * cone.rayon + cone.hauteur * cone.hauteur))
+                | number : "1.2-2"
+            }}
+            m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Volume :</strong>
+            {{
+              (PI * cone.rayon * cone.rayon * cone.hauteur) / 3 | number : "1.2-2"
+            }}
+            m<sup>3</sup>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-------------------------------------------Ajouter un cone----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter un cone</h2>
+      <form (ngSubmit)="addCone(nom, couleur, hauteur, rayon)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="hauteur">Hauteur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="number" min="0" id="hauteur" [(ngModel)]="hauteur" name="hauteur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="rayon">Rayon</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!------------------------------Liste de tous les cones avec bouton supprimer---------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container">
+      <i class="bi bi-trash-fill"></i> Liste des Cones
+    </h2>
+    <div class="row">
+      <div *ngFor="let cone of cones" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ cone.nom }}</p>
+          <p><strong>Couleur :</strong> {{ cone.couleur }}</p>
+          <p><strong>Hauteur :</strong> {{ cone.hauteur }} m</p>
+          <p><strong>Rayon :</strong> {{ cone.rayon }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{
+              PI * cone.rayon * (cone.rayon + RC(cone.rayon * cone.rayon + cone.hauteur * cone.hauteur))
+                | number : "1.2-2"
+            }}
+            m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Volume :</strong>
+            {{
+              (PI * cone.rayon * cone.rayon * cone.hauteur) / 3 | number : "1.2-2"
+            }}
+            m<sup>3</sup>
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteCone(cone)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

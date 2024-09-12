@@ -1,0 +1,143 @@
+.plastic-film {
+  background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond noire avec 50% de transparence */
+  backdrop-filter: blur(4px); /* Floute l'arrière-plan derrière le film plastique */
+  border-radius: 10px; /* Coins arrondis pour un effet plus doux */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), /* Ombre externe subtile */
+              inset 0 -3px 8px rgba(255, 255, 255, 0.1); /* Ombre interne pour simuler la profondeur */
+  padding: 20px; /* Espacement interne */
+  color: white; /* Texte en blanc pour un bon contraste */
+  margin: 20px auto; /* Marge autour du conteneur */
+  width: 100%;
+  text-align: center; /* Centre le texte et les éléments à l'intérieur */
+  position: relative; /* Position relative pour les effets enfants */
+  overflow: hidden; /* Cache les débordements pour les effets internes */
+}
+
+/* Effet de grain de film plastique */
+.plastic-film::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 10px,
+    transparent 10px,
+    transparent 20px
+  ); /* Crée un motif de lignes diagonales subtiles */
+  pointer-events: none; /* Rend l'élément insensible aux événements */
+  opacity: 0.8; /* Réduit l'opacité pour adoucir l'effet */
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+/* CSS pour l'icone Accueil */
+.bi-house-door {
+  font-size: 36px;
+  color: #000000;
+}
+
+/* Style de base pour l'icône */
+.right-link a i.bi-house-door {
+  transition: transform 0.3s ease; /* Transition lente */
+  display: inline-block;
+}
+
+/* Effet lors du survol de l'icône */
+.right-link a:hover i.bi-house-door {
+  transform: rotate(-15deg); /* Incline l'icône légèrement vers la gauche */
+}
+
+.right-link a:active i.bi-house-door {
+  transform: rotate(
+    15deg
+  ); /* Incline l'icône légèrement vers la droite lors du clique */
+}
+
+/* CSS pour le footer */
+footer {
+  position: relative;
+  margin-top: 200px;
+  background-color: #3d3d3d;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column; /* Aligner les éléments en colonne */
+  align-items: center; /* Centrer les éléments horizontalement */
+}
+
+.footer-icons {
+  display: flex; /* Affiche les icônes sur une ligne */
+  justify-content: center; /* Centrer les icônes */
+  margin-bottom: 10px; /* Espacement entre les icônes et les liens */
+}
+
+.footer-icons i {
+  margin: 0 10px; /* Espacement entre les icônes */
+  font-size: 1.5em; /* Taille des icônes */
+}
+
+.footer-nav {
+  display: flex; /* Utiliser flexbox pour les liens */
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+  justify-content: center; /* Centrer les liens */
+}
+
+.footer-nav a {
+  padding: 5px 15px;
+  border-right: 1px solid #000;
+  text-decoration: none;
+  color: white;
+  margin: 5px 0; /* Ajouter un espacement vertical entre les liens */
+}
+
+.footer-nav a:last-child {
+  border-right: none; /* Supprime la bordure du dernier lien */
+}
+
+
+.bi-facebook {
+  position: absolute;
+  top: -48px;
+  right: 50px;
+  color: blue;
+  font-size: 2rem;
+  background-color: white;
+}
+
+.bi-tiktok {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  color: black;
+  font-size: 1.9rem;
+  background-color: white;
+}
+
+.bi-instagram {
+  position: absolute;
+  top: -48px;
+  right: 100px;
+  color: #cd486b;
+  font-size: 2rem;
+  background-color: white;
+}
+
+.bi-github {
+  position: absolute;
+  top: -48px;
+  right: 150px;
+  font-size: 2rem;
+  background-color: white;
+}

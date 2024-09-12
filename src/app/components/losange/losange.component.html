@@ -1,0 +1,387 @@
+<!------------------------------------------Navigateur------------------------------------------------>
+<div class="nav row">
+  <div class="text-center mb-2 link-3d">
+    <a routerLink="/forme3d"><b>3 D</b></a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/carre">Carré</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/triangle">Triangle</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/rectangle">Rectangle</a>
+  </div>
+  <div class="text-center mb-2">
+    <a routerLink="/cercle">Cercle</a>
+  </div>
+</div>
+
+<!------------------------------------------Calculer-------------------------------------------------->
+<div class="container container-calcul">
+  <div class="row">
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+      <div class="form-link col-2">
+        <a href="https://fr.wikipedia.org/wiki/Losange" target="_blank">
+          <img src="assets/images/loupe.png" alt="lien wikipédia" class="img-fluid">
+        </a>
+      </div>
+      <div>
+        <img src="assets/images/4.png" alt="losange" class="img-fluid mt-3" />
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="losange-calcul">
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="nom1" class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="nom1" [(ngModel)]="nom" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="couleur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="couleur1" [(ngModel)]="couleur" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="a1" class="col-12 col-sm-4 col-md-3 col-lg-2">a</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="a1" [(ngModel)]="cote" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="D1" class="col-12 col-sm-4 col-md-3 col-lg-2">D</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="D1" [(ngModel)]="grandeDiag" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mb-3">
+          <label for="d1" class="col-12 col-sm-4 col-md-3 col-lg-2">d</label>
+          <div class="col-12 col-sm-8 col-md-9 col-lg-8">
+            <input id="d1" [(ngModel)]="petiteDiag" type="number" min="0" class="form-control" />
+          </div>
+        </div>
+
+        <div class="calcul-result">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-8 m-2">
+              <strong>Surface</strong> {{ surface.toFixed(2) }} m<sup>2</sup>
+            </div>
+            <div class="col-12 col-lg-8 mb-3">
+              <strong>Périmètre</strong> {{ perimetre.toFixed(2) }} m
+            </div>
+            <div class="col-12 col-lg-8">
+              <button class="btn btn-primary" (click)="calculer()">Calculer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---------------------------------Lecture des losanges existants----------------------------------->
+<div class="container-calcul">
+  <h2>Voir les losanges existants</h2>
+  <button class="btn btn-primary" (click)="toggleLosanges()">
+    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span>
+  </button>
+  <div *ngIf="showLosanges">
+    <div class="row">
+      <div *ngFor="let losange of losanges" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ losange.nom }}</p>
+          <p><strong>Couleur :</strong> {{ losange.couleur }}</p>
+          <p><strong>a :</strong> {{ losange.cote }} m</p>
+          <p><strong>D :</strong> {{ losange.grandeDiag }} m</p>
+          <p><strong>d :</strong> {{ losange.petiteDiag }} m</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-calcul">
+  <div class="row">
+    <!---------------------------------- Modifier un losange---------------------------------------------->
+    <div class="col-12 col-md-6 mb-4">
+      <h2 class="text-center">Modifier un losange</h2>
+      <form (ngSubmit)="updateLosange()">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2 mt-3">
+            <label for="id">Id</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-6 mt-3">
+            <select
+              id="id"
+              [(ngModel)]="selectedLosangeId"
+              name="losangeId"
+              class="form-control"
+              (change)="onIdChange()"
+              required
+            >
+              <option *ngFor="let losange of losanges" [value]="losange.id">
+                {{ losange.id }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="nom2">Nom</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="text"
+              id="nom2"
+              [(ngModel)]="nom"
+              name="nom"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="couleur2">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="text"
+              id="couleur2"
+              [(ngModel)]="couleur"
+              name="couleur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="a2">a</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="number"
+              min="0"
+              id="a2"
+              [(ngModel)]="cote"
+              name="cote"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="grandeDiag">D</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="number"
+              min="0"
+              id="grandeDiag"
+              [(ngModel)]="grandeDiag"
+              name="grandeDiag"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-3 col-lg-2">
+            <label for="petiteDiag">d</label>
+          </div>
+          <div class="col-12 col-sm-9 col-lg-4">
+            <input
+              type="number"
+              min="0"
+              id="petiteDiag"
+              [(ngModel)]="petiteDiag"
+              name="petiteDiag"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+        </div>
+      </form>
+    </div>
+
+    <!---------------------------- Rechercher un losange à partir de son ID---------------------------->
+    <div class="col-12 col-md-6">
+      <div class="d-flex align-items-center justify-content-between">
+        <h2 class="text-center w-100">Recherche par ID</h2>
+        <div class="input-group w-50 mt-3 mx-auto">
+          <select
+            class="form-control"
+            [(ngModel)]="selectedLosangeId"
+            (change)="getLosangeById(selectedLosangeId)"
+          >
+            <option *ngFor="let losange of losanges" [value]="losange.id">
+              {{ losange.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Section pour afficher les détails du losange recherché -->
+      <div *ngIf="losange" class="mt-3">
+        <div class="mini-card p-3 border rounded">
+          <p><strong>Nom :</strong> {{ losange.nom }}</p>
+          <p><strong>Couleur :</strong> {{ losange.couleur }}</p>
+          <p><strong>a :</strong> {{ losange.cote }} m</p>
+          <p><strong>D:</strong> {{ losange.grandeDiag }} m</p>
+          <p><strong>d:</strong> {{ losange.petiteDiag }} m</p>
+          <p>
+            <strong>Surface:</strong>
+            {{ (losange.petiteDiag * losange.grandeDiag) / 2 | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Périmètre:</strong>
+            {{ 4 * losange.cote | number : "1.2-2" }} m
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-----------------------------------------Ajouter un losange----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter un losange</h2>
+      <form (ngSubmit)="addLosange(nom, couleur, cote, petiteDiag, grandeDiag)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="nom"
+              [(ngModel)]="nom"
+              name="nom"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="couleur"
+              [(ngModel)]="couleur"
+              name="couleur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="cote">a</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="cote"
+              [(ngModel)]="cote"
+              name="cote"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="grandeDiag">D</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="grandeDiag"
+              [(ngModel)]="grandeDiag"
+              name="grandeDiag"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="petiteDiag">d</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="petiteDiag"
+              [(ngModel)]="petiteDiag"
+              name="petiteDiag"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!----------------------------------Liste de tous les losanges----------------------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container">
+      <i class="bi bi-trash-fill"></i> Liste des Losanges
+    </h2>
+    <div class="row">
+      <div *ngFor="let losange of losanges" class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="mini-container p-3 border rounded">
+          <p><strong>Nom :</strong> {{ losange.nom }}</p>
+          <p><strong>Couleur :</strong> {{ losange.couleur }}</p>
+          <p><strong>a :</strong> {{ losange.cote }} m</p>
+          <p><strong>D :</strong> {{ losange.grandeDiag }} m</p>
+          <p><strong>d :</strong> {{ losange.petiteDiag }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ (losange.petiteDiag * losange.grandeDiag) / 2 | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Périmètre :</strong>
+            {{ 4 * losange.cote | number : "1.2-2" }} m
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteLosange(losange)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
