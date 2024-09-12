@@ -31,33 +31,33 @@
       <div class="triangle-calcul">
         <!-- Nom -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</div>
+          <label for="nom1" class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="nom" type="text" class="form-control" />
+            <input id="nom1" [(ngModel)]="nom" type="text" class="form-control" />
           </div>
         </div>
 
         <!-- Couleur -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</div>
+          <label for="couleur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="couleur" type="text" class="form-control" />
+            <input id="couleur1" [(ngModel)]="couleur" type="text" class="form-control" />
           </div>
         </div>
 
         <!-- Côté adjacent (a) -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">a</div>
+          <label for="coteAdjacent1" class="col-12 col-sm-4 col-md-3 col-lg-2">a</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="coteAdjacent" type="number" min="0" class="form-control" />
+            <input id="coteAdjacent1" [(ngModel)]="coteAdjacent" type="number" min="0" class="form-control" />
           </div>
         </div>
 
         <!-- Côté opposé (b) -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">b</div>
+          <label for="coteOppose1" class="col-12 col-sm-4 col-md-3 col-lg-2">b</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="coteOppose" type="number" min="0" class="form-control" />
+            <input id="coteOppose1" [(ngModel)]="coteOppose" type="number" min="0" class="form-control" />
           </div>
         </div>
 
@@ -111,7 +111,7 @@
             <label for="id">Id</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-6 mt-3">
-            <select [(ngModel)]="selectedTriangleId" name="triangleId" class="form-control" (change)="onIdChange()" required>
+            <select id="id" [(ngModel)]="selectedTriangleId" name="triangleId" class="form-control" (change)="onIdChange()" required>
               <option *ngFor="let triangle of triangles" [value]="triangle.id">
                 {{ triangle.id }}
               </option>
@@ -121,37 +121,37 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="nom">Nom</label>
+            <label for="nom2">Nom</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+            <input type="text" id="nom2" [(ngModel)]="nom" name="nom" class="form-control" required />
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="couleur">Couleur</label>
+            <label for="couleur2">Couleur</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+            <input type="text" id="couleur2" [(ngModel)]="couleur" name="couleur" class="form-control" required />
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="coteAdjacent">a</label>
+            <label for="coteAdjacent2">a</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="number" min="0" id="coteAdjacent" [(ngModel)]="coteAdjacent" name="coteAdjacent" class="form-control" required />
+            <input type="number" min="0" id="coteAdjacent2" [(ngModel)]="coteAdjacent" name="coteAdjacent" class="form-control" required />
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="coteOppose">b</label>
+            <label for="coteOppose2">b</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="number" min="0" id="coteOppose" [(ngModel)]="coteOppose" name="coteOppose" class="form-control" required />
+            <input type="number" min="0" id="coteOppose2" [(ngModel)]="coteOppose" name="coteOppose" class="form-control" required />
           </div>
         </div>
 
@@ -164,9 +164,9 @@
     <!---------------------------- Rechercher un Triangle à partir de son ID ---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <h2 class="text-center w-100">Recherche par ID</h2>
+        <label for="Sélectionnez un Triangle" class="text-center w-100">Sélectionnez un Triangle</label>
         <div class="input-group w-50 mt-3 mx-auto">
-          <select class="form-control" [(ngModel)]="selectedTriangleId" (change)="getTriangleById(selectedTriangleId)">
+          <select id="Sélectionnez un Triangle" class="form-control" [(ngModel)]="selectedTriangleId" (change)="getTriangleById(selectedTriangleId)">
             <option *ngFor="let triangle of triangles" [value]="triangle.id">
               {{ triangle.id }}
             </option>

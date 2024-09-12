@@ -28,25 +28,25 @@
       <div class="sphere-calcul">
         <!-- Nom -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</div>
+          <label for="nom1" class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="nom" type="text" class="form-control" />
+            <input id="nom1" [(ngModel)]="nom" type="text" class="form-control" />
           </div>
         </div>
 
         <!-- Couleur -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</div>
+          <label for="couleur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="couleur" type="text" class="form-control" />
+            <input id="couleur1" [(ngModel)]="couleur" type="text" class="form-control" />
           </div>
         </div>
 
         <!-- Rayon -->
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Rayon</div>
+          <label for="rayon1" class="col-12 col-sm-4 col-md-3 col-lg-2">Rayon</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="rayon" type="number" min="0" class="form-control" />
+            <input id="rayon1" [(ngModel)]="rayon" type="number" min="0" class="form-control" />
           </div>
         </div>
 
@@ -99,7 +99,7 @@
             <label for="id">Id</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-6 mt-3">
-            <select [(ngModel)]="selectedSphereId" name="sphereId" class="form-control" (change)="onIdChange()" required>
+            <select [(ngModel)]="selectedSphereId" id="id" name="sphereId" class="form-control" (change)="onIdChange()" required>
               <option *ngFor="let sphere of spheres" [value]="sphere.id">
                 {{ sphere.id }}
               </option>
@@ -109,28 +109,28 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="nom">Nom</label>
+            <label for="nom2">Nom</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+            <input type="text" id="nom2" [(ngModel)]="nom" name="nom" class="form-control" required />
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="couleur">Couleur</label>
+            <label for="couleur2">Couleur</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+            <input type="text" id="couleur2" [(ngModel)]="couleur" name="couleur" class="form-control" required />
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="rayon">Rayon</label>
+            <label for="rayon2">Rayon</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
-            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+            <input type="number" min="0" id="rayon2" [(ngModel)]="rayon" name="rayon" class="form-control" required />
           </div>
         </div>
 
@@ -143,9 +143,9 @@
     <!---------------------------- Rechercher une sphère à partir de son ID ---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <h2 class="text-center w-100">Recherche par ID</h2>
+        <label for="Sélectionnez une Sphère" class="text-center w-100">Sélectionnez une Sphère</label>
         <div class="input-group w-50 mt-3 mx-auto">
-          <select class="form-control" [(ngModel)]="selectedSphereId" (change)="getSphereById(selectedSphereId)">
+          <select id="Sélectionnez une Sphère" class="form-control" [(ngModel)]="selectedSphereId" (change)="getSphereById(selectedSphereId)">
             <option *ngFor="let sphere of spheres" [value]="sphere.id">
               {{ sphere.id }}
             </option>

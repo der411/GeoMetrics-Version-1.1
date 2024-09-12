@@ -33,30 +33,30 @@
     <div class="col-12 col-md-6">
       <div class="rectangle-calcul">
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</div>
+          <label for="nom1" class="col-12 col-sm-4 col-md-3 col-lg-2">Nom</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="nom" type="text" class="form-control" />
+            <input id="nom1" [(ngModel)]="nom" type="text" class="form-control" />
           </div>
         </div>
 
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</div>
+          <label for="couleur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Couleur</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="couleur" type="text" class="form-control" />
+            <input id="couleur1" [(ngModel)]="couleur" type="text" class="form-control" />
           </div>
         </div>
 
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Longueur (L)</div>
+          <label for="longueur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Longueur (L)</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="longueur" type="number" min="0" class="form-control" />
+            <input id="longueur1" [(ngModel)]="longueur" type="number" min="0" class="form-control" />
           </div>
         </div>
 
         <div class="row justify-content-center align-items-center mb-3">
-          <div class="col-12 col-sm-4 col-md-3 col-lg-2">Largeur (l)</div>
+          <label for="largeur1" class="col-12 col-sm-4 col-md-3 col-lg-2">Largeur (l)</label>
           <div class="col-12 col-sm-8 col-md-9 col-lg-8">
-            <input [(ngModel)]="largeur" type="number" min="0" class="form-control" />
+            <input id="largeur1" [(ngModel)]="largeur" type="number" min="0" class="form-control" />
           </div>
         </div>
 
@@ -110,6 +110,7 @@
           </div>
           <div class="col-12 col-sm-9 col-lg-6 mt-3">
             <select
+              id="id"
               [(ngModel)]="selectedRectangleId"
               name="rectangleId"
               class="form-control"
@@ -125,12 +126,12 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="nom">Nom</label>
+            <label for="nom2">Nom</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
             <input
               type="text"
-              id="nom"
+              id="nom2"
               [(ngModel)]="nom"
               name="nom"
               class="form-control"
@@ -141,12 +142,12 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="couleur">Couleur</label>
+            <label for="couleur2">Couleur</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
             <input
               type="text"
-              id="couleur"
+              id="couleur2"
               [(ngModel)]="couleur"
               name="couleur"
               class="form-control"
@@ -157,13 +158,13 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="longueur">Longueur (L)</label>
+            <label for="longueur2">Longueur (L)</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
             <input
               type="number"
               min="0"
-              id="longueur"
+              id="longueur2"
               [(ngModel)]="longueur"
               name="longueur"
               class="form-control"
@@ -174,13 +175,13 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-3 col-lg-2">
-            <label for="largeur">Largeur (l)</label>
+            <label for="largeur2">Largeur (l)</label>
           </div>
           <div class="col-12 col-sm-9 col-lg-4">
             <input
               type="number"
               min="0"
-              id="largeur"
+              id="largeur2"
               [(ngModel)]="largeur"
               name="largeur"
               class="form-control"
@@ -198,9 +199,10 @@
     <!---------------------------- Rechercher un rectangle à partir de son ID---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <h2 class="text-center w-100">Recherche par ID</h2>
+        <label for="Sélectionnez un Rectangle" class="text-center w-100">Sélectionnez un Rectangle</label>
         <div class="input-group w-50 mt-3 mx-auto">
           <select
+          id="Sélectionnez un Rectangle"
             class="form-control"
             [(ngModel)]="selectedRectangleId"
             (change)="getRectangleById(selectedRectangleId)"

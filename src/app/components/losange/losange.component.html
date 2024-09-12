@@ -224,9 +224,10 @@
     <!---------------------------- Rechercher un losange à partir de son ID---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <h2 class="text-center w-100">Recherche par ID</h2>
+        <label for="selectedLosangeId" class="text-center w-100">Sélectionnez un Losange</label>
         <div class="input-group w-50 mt-3 mx-auto">
           <select
+          id="selectedLosangeId"
             class="form-control"
             [(ngModel)]="selectedLosangeId"
             (change)="getLosangeById(selectedLosangeId)"
@@ -317,13 +318,13 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-4">
-            <label for="grandeDiag">D</label>
+            <label for="grandeDiag1">D</label>
           </div>
           <div class="col-12 col-sm-8">
             <input
               type="number"
               min="0"
-              id="grandeDiag"
+              id="grandeDiag1"
               [(ngModel)]="grandeDiag"
               name="grandeDiag"
               class="form-control"
@@ -334,13 +335,13 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-12 col-sm-4">
-            <label for="petiteDiag">d</label>
+            <label for="petiteDiag1">d</label>
           </div>
           <div class="col-12 col-sm-8">
             <input
               type="number"
               min="0"
-              id="petiteDiag"
+              id="petiteDiag1"
               [(ngModel)]="petiteDiag"
               name="petiteDiag"
               class="form-control"
