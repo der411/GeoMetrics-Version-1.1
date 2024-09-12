@@ -199,11 +199,11 @@
     <!---------------------------- Rechercher un rectangle à partir de son ID---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <label for="Sélectionnez un Rectangle" class="text-center w-100">Sélectionnez un Rectangle</label>
-        <div class="input-group w-50 mt-3 mx-auto">
+        <label for="Sélectionnez un Rectangle" class="col-6"><h2 class="text-center">Sélectionnez un Rectangle</h2></label>
+        <div class="col-5">
           <select
           id="Sélectionnez un Rectangle"
-            class="form-control"
+            class="form-control w-100"
             [(ngModel)]="selectedRectangleId"
             (change)="getRectangleById(selectedRectangleId)"
           >

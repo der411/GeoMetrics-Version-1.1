@@ -168,9 +168,9 @@
     <!---------------------------- Rechercher un Cylindre à partir de son ID---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <label for="selectedCylindreId" class="text-center w-100">Sélectionnez un Cylindre</label>
-        <div class="input-group w-50 mt-3 mx-auto">
-          <select id="selectedCylindreId" class="form-control" [(ngModel)]="selectedCylindreId" (change)="getCylindreById(selectedCylindreId)">
+        <label for="selectedCylindreId" class="col-6"><h2 class="text-center">Sélectionnez un Cylindre</h2></label>
+        <div class="col-5">
+          <select id="selectedCylindreId" class="form-control w-100" [(ngModel)]="selectedCylindreId" (change)="getCylindreById(selectedCylindreId)">
             <option *ngFor="let cylindre of cylindres" [value]="cylindre.id">
               {{ cylindre.id }}
             </option>

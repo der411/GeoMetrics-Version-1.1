@@ -164,9 +164,9 @@
     <!---------------------------- Rechercher un Cone à partir de son ID ---------------------------->
     <div class="col-12 col-md-6">
       <div class="d-flex align-items-center justify-content-between">
-        <label for="selectedConeId" class="text-center w-100">Sélectionnez un Cône</label>
-        <div class="input-group w-50 mt-3 mx-auto">
-          <select id="selectedConeId" class="form-control" [(ngModel)]="selectedConeId" (change)="getConeById(selectedConeId)">
+        <label for="selectedConeId" class="col-6"><h2 class="text-center">Sélectionnez un Cône</h2></label>
+        <div class="col-5">
+          <select id="selectedConeId" class="form-control w-100" [(ngModel)]="selectedConeId" (change)="getConeById(selectedConeId)">
             <option *ngFor="let cone of cones" [value]="cone.id">
               {{ cone.id }}
             </option>
