@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -22,12 +21,19 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "skipLibCheck": true,  // Ajouté pour ignorer les erreurs dans les fichiers de déclaration
+    "paths": {
+      "three/*": ["./node_modules/@types/three/*"]  // Ajouté pour résoudre les problèmes d'importation de Three.js
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "node_modules/@types/three/examples/jsm/loaders/KTX2Loader.d.ts"  // Ajouté pour exclure le fichier problématique
+  ]
 }

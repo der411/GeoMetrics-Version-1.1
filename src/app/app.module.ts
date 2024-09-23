@@ -19,6 +19,7 @@ import { SphereComponent } from './components/sphere/sphere.component';
 import { CubeComponent } from './components/cube/cube.component';
 import { ConeComponent } from './components/cone/cone.component';
 import { CylindreComponent } from './components/cylindre/cylindre.component';
+import { AnimationComponent } from './components/animation/animation.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { CylindreComponent } from './components/cylindre/cylindre.component';
     CercleComponent,
     CubeComponent,
     CylindreComponent,
+    AnimationComponent,
   ],
 
   imports: [
