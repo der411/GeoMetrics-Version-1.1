@@ -7,3 +7,6 @@ node_modules/
 
 # misc
 .env
+
+# Ignorer le fichier animation.glb
+src/assets/videos/animation.glb
