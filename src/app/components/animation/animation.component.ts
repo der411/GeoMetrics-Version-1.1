@@ -23,7 +23,7 @@ export class AnimationComponent implements OnInit {
   private initThreeJS() {
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.set(0, -1, 8); // Ajustez ces valeurs selon votre modèle
+    this.camera.position.set(0, 0, 5); // Reculer la caméra
 
     // Configurer le renderer avec un fond transparent
     this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -51,39 +51,38 @@ export class AnimationComponent implements OnInit {
     loader.load('./assets/videos/animation.glb', (gltf) => {
       if (this.scene) {
         this.scene.add(gltf.scene);
-         // Incliner le modèle de 10 degrés vers l'utilisateur
-         gltf.scene.rotation.x = THREE.MathUtils.degToRad(30);
-         // Rotation horizontale de 90 degrés dans le sens antihoraire
-         gltf.scene.rotation.y = THREE.MathUtils.degToRad(90);
-         
+        // Incliner le modèle de 10 degrés vers l'utilisateur
+        gltf.scene.rotation.x = THREE.MathUtils.degToRad(20);
+        // Rotation horizontale de 90 degrés dans le sens antihoraire
+        gltf.scene.rotation.y = THREE.MathUtils.degToRad(90);
+        gltf.scene.position.z -= 5; // Reculer le modèle de 5 unités
+        gltf.scene.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.material.transparent = true;
+            child.material.opacity = 0.8; // Rendre l'animation transparente
+          }
+        });
       }
-      
+
       if (gltf.animations && gltf.animations.length) {
         this.mixer = new THREE.AnimationMixer(gltf.scene);
         const action = this.mixer.clipAction(gltf.animations[0]);
         action.play();
       }
-      
+
       this.animate();
     }, undefined, (error) => {
       console.error('Erreur lors du chargement du modèle:', error);
     });
-
-    // Ajouter un voile d'ombre noire
-    const shadowMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.65, transparent: true });
-    const shadowPlane = new THREE.PlaneGeometry(20, 20);
-    const shadowMesh = new THREE.Mesh(shadowPlane, shadowMaterial);
-    shadowMesh.position.set(0, 0, 5); // Positionner le voile devant la caméra
-    this.scene.add(shadowMesh);
   }
-  
+
   private animate() {
     requestAnimationFrame(() => this.animate());
-    
+
     if (this.mixer) {
       this.mixer.update(this.clock.getDelta());
     }
-    
+
     if (this.renderer && this.scene && this.camera) {
       this.renderer.render(this.scene, this.camera);
     }
