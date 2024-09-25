@@ -69,19 +69,65 @@
   </div>
 </div>
 
-<!-------------------------------------Lecture des sphères existantes----------------------------------->
-<div class="container-calcul">
-  <h2>Voir les sphères existantes</h2>
-  <button class="btn btn-primary" (click)="toggleSpheres()">
-    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span>
-  </button>
-  <div *ngIf="showSpheres">
+<!-------------------------------------------Ajouter une sphère----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter une sphère</h2>
+      <form (ngSubmit)="addSphere(nom, couleur, rayon)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="rayon">Rayon</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!------------------------------Liste de toutes les sphères avec bouton supprimer---------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container-sphere"><i class="bi bi-trash-fill"></i> Liste des Sphères</h2>
     <div class="row">
       <div *ngFor="let sphere of spheres" class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="mini-container-sphere p-3 border rounded">
           <p><strong>Nom :</strong> {{ sphere.nom }}</p>
           <p><strong>Couleur :</strong> {{ sphere.couleur }}</p>
           <p><strong>Rayon :</strong> {{ sphere.rayon }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ 4 * PI * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Volume :</strong>
+            {{ (4 / 3) * PI * sphere.rayon * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>3</sup>
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteSphere(sphere)">Supprimer</button>
+          </div>
         </div>
       </div>
     </div>
@@ -173,65 +219,19 @@
   </div>
 </div>
 
-<!-------------------------------------------Ajouter une sphère----------------------------------------->
-<div class="row">
-  <div class="col-12 col-lg-4 mb-4">
-    <div class="container-calcul p-3 border rounded">
-      <h2 class="text-center">Ajouter une sphère</h2>
-      <form (ngSubmit)="addSphere(nom, couleur, rayon)">
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="nom">Nom</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input type="text" id="nom" [(ngModel)]="nom" name="nom" class="form-control" required />
-          </div>
-        </div>
-
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="couleur">Couleur</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input type="text" id="couleur" [(ngModel)]="couleur" name="couleur" class="form-control" required />
-          </div>
-        </div>
-
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="rayon">Rayon</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input type="number" min="0" id="rayon" [(ngModel)]="rayon" name="rayon" class="form-control" required />
-          </div>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!------------------------------Liste de toutes les sphères avec bouton supprimer---------------------------->
-  <div class="col-12 col-lg-8">
-    <h2 class="text-center mt-2 mini-container-sphere"><i class="bi bi-trash-fill"></i> Liste des Sphères</h2>
+<!-------------------------------------Lecture des sphères existantes----------------------------------->
+<div class="container-calcul">
+  <h2>Sphères existantes</h2>
+  <button class="btn btn-primary" (click)="toggleSpheres()">
+    <i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer</span>
+  </button>
+  <div *ngIf="showSpheres">
     <div class="row">
       <div *ngFor="let sphere of spheres" class="col-12 col-md-6 col-lg-4 mb-4">
         <div class="mini-container-sphere p-3 border rounded">
           <p><strong>Nom :</strong> {{ sphere.nom }}</p>
           <p><strong>Couleur :</strong> {{ sphere.couleur }}</p>
           <p><strong>Rayon :</strong> {{ sphere.rayon }} m</p>
-          <p>
-            <strong>Surface :</strong>
-            {{ 4 * PI * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>2</sup>
-          </p>
-          <p>
-            <strong>Volume :</strong>
-            {{ (4 / 3) * PI * sphere.rayon * sphere.rayon * sphere.rayon | number : "1.2-2" }} m<sup>3</sup>
-          </p>
-          <div class="text-center">
-            <button class="btn btn-danger mt-2" (click)="deleteSphere(sphere)">Supprimer</button>
-          </div>
         </div>
       </div>
     </div>

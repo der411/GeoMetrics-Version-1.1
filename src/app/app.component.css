@@ -1,25 +1,33 @@
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #fff; /* ou la couleur de fond souhaitée */
+}
+
+.content {
+  margin-top: 420px; /* Ajustez cette valeur en fonction de la hauteur de votre header */
+}
+
 .plastic-film {
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.8
-  ); /* Couleur de fond noire avec 80% de transparence */
-  backdrop-filter: blur(
-    4px
-  ); /* Floute l'arrière-plan derrière le film plastique */
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3),
-    /* Ombre externe subtile */ inset 0 -3px 8px rgba(255, 255, 255, 0.1); /* Ombre interne pour simuler la profondeur */
+    inset 0 -3px 8px rgba(255, 255, 255, 0.1);
   padding: 20px;
   color: white;
-  margin: 20px auto;
+  margin: 0 auto;
   width: 100%;
   text-align: center;
-  position: relative; /* Position relative pour les effets enfants */
-  overflow: hidden; /* Cache les débordements pour les effets internes */
+  position: relative;
+  overflow: hidden;
 }
+
+/* Le reste de votre CSS reste inchangé */
 
 /* Effet de grain de film plastique */
 .plastic-film::before {
@@ -35,40 +43,34 @@
     rgba(255, 255, 255, 0.03) 10px,
     transparent 10px,
     transparent 20px
-  ); /* Crée un motif de lignes diagonales subtiles */
-  pointer-events: none; /* Rend l'élément insensible aux événements */
+  );
+  pointer-events: none;
   opacity: 0.8;
 }
 
 .logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 60px;
+  
 }
 
-/* CSS pour l'icone Accueil */
 .bi-house-door {
   font-size: 36px;
   color: #000000;
 }
 
-/* Style de base pour l'icône */
 .right-link a i.bi-house-door {
-  transition: transform 0.3s ease; /* Transition lente */
+  transition: transform 0.3s ease;
   display: inline-block;
 }
 
-/* Effet lors du survol de l'icône */
 .right-link a:hover i.bi-house-door {
-  transform: rotate(-15deg); /* Incline l'icône légèrement vers la gauche */
+  transform: rotate(-15deg);
 }
 
 .right-link a:active i.bi-house-door {
-  transform: rotate(
-    15deg
-  ); /* Incline l'icône légèrement vers la droite lors du clique */
+  transform: rotate(15deg);
 }
-
 /* CSS pour le footer */
 footer {
   position: relative;

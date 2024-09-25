@@ -73,20 +73,86 @@
 </div>
 </div>
 
-<!-------------------------------------Lecture des carrés existants----------------------------------->
+<!-------------------------------------------Ajouter un carré----------------------------------------->
+<div class="row">
+  <div class="col-12 col-lg-4 mb-4">
+    <div class="container-calcul p-3 border rounded">
+      <h2 class="text-center">Ajouter un carré</h2>
+      <form (ngSubmit)="addCarre(nom, couleur, cote)">
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="nom">Nom</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="nom"
+              [(ngModel)]="nom"
+              name="nom"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
 
-<div class="container-calcul">
-  <h2>Voir les carrés existants</h2>
-  <button class="btn btn-primary" (click)="toggleCarres()"><i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer les carrés</span></button>
-  <div *ngIf="showCarres">
-    <!--*ngIf Directive structurelle Angular: pour conditionnellement inclure ou exclure un élement du DOM en fonction d'un boolean -->
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="couleur">Couleur</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="text"
+              id="couleur"
+              [(ngModel)]="couleur"
+              name="couleur"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-12 col-sm-4">
+            <label for="cote">a</label>
+          </div>
+          <div class="col-12 col-sm-8">
+            <input
+              type="number"
+              min="0"
+              id="cote"
+              [(ngModel)]="cote"
+              name="cote"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!------------------------------Liste de tous les carrés avec bouton supprimer---------------------------->
+  <div class="col-12 col-lg-8">
+    <h2 class="text-center mt-2 mini-container"><i class="bi bi-trash-fill"></i> Liste des Carrés</h2>
     <div class="row">
       <div *ngFor="let carre of carres" class="col-12 col-md-6 col-lg-4 mb-4">
-        <!--*ngFor Directive structurelle Angular:  affiche un élément du DOM pour chaque élément de la collection. -->
         <div class="mini-container p-3 border rounded">
-          <p><Strong>Nom :</Strong> {{ carre.nom }}</p>
-          <p><Strong>Couleur :</Strong> {{ carre.couleur }}</p>
-          <p><Strong>a :</Strong> {{ carre.cote }} m</p>
+          <p><strong>Nom :</strong> {{ carre.nom }}</p>
+          <p><strong>Couleur :</strong> {{ carre.couleur }}</p>
+          <p><strong>a :</strong> {{ carre.cote }} m</p>
+          <p>
+            <strong>Surface :</strong>
+            {{ carre.cote * carre.cote | number : "1.2-2" }} m<sup>2</sup>
+          </p>
+          <p>
+            <strong>Périmètre :</strong>
+            {{ 4 * carre.cote | number : "1.2-2" }} m
+          </p>
+          <div class="text-center">
+            <button class="btn btn-danger mt-2" (click)="deleteCarre(carre)">Supprimer</button>
+          </div>
         </div>
       </div>
     </div>
@@ -214,90 +280,22 @@
   </div>
 </div>
 
+<!-------------------------------------Lecture des carrés existants----------------------------------->
 
-<!-------------------------------------------Ajouter un carré----------------------------------------->
-<div class="row">
-  <div class="col-12 col-lg-4 mb-4">
-    <div class="container-calcul p-3 border rounded">
-      <h2 class="text-center">Ajouter un carré</h2>
-      <form (ngSubmit)="addCarre(nom, couleur, cote)">
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="nom">Nom</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input
-              type="text"
-              id="nom"
-              [(ngModel)]="nom"
-              name="nom"
-              class="form-control"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="couleur">Couleur</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input
-              type="text"
-              id="couleur"
-              [(ngModel)]="couleur"
-              name="couleur"
-              class="form-control"
-              required
-            />
-          </div>
-        </div>
-
-        <div class="row align-items-center mb-3">
-          <div class="col-12 col-sm-4">
-            <label for="cote">a</label>
-          </div>
-          <div class="col-12 col-sm-8">
-            <input
-              type="number"
-              min="0"
-              id="cote"
-              [(ngModel)]="cote"
-              name="cote"
-              class="form-control"
-              required
-            />
-          </div>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary mt-3">Ajouter</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <!------------------------------Liste de tous les carrés avec bouton supprimer---------------------------->
-  <div class="col-12 col-lg-8">
-    <h2 class="text-center mt-2 mini-container"><i class="bi bi-trash-fill"></i> Liste des Carrés</h2>
+<div class="container-calcul">
+  <h2>Carrés existants</h2>
+  <button class="btn btn-primary" (click)="toggleCarres()"><i class="bi bi-caret-down"></i><i class="bi bi-caret-up"></i><span class="sr-only"> Afficher ou masquer</span></button>
+  <div *ngIf="showCarres">
+    <!--*ngIf Directive structurelle Angular: pour conditionnellement inclure ou exclure un élement du DOM en fonction d'un boolean -->
     <div class="row">
       <div *ngFor="let carre of carres" class="col-12 col-md-6 col-lg-4 mb-4">
+        <!--*ngFor Directive structurelle Angular:  affiche un élément du DOM pour chaque élément de la collection. -->
         <div class="mini-container p-3 border rounded">
-          <p><strong>Nom :</strong> {{ carre.nom }}</p>
-          <p><strong>Couleur :</strong> {{ carre.couleur }}</p>
-          <p><strong>a :</strong> {{ carre.cote }} m</p>
-          <p>
-            <strong>Surface :</strong>
-            {{ carre.cote * carre.cote | number : "1.2-2" }} m<sup>2</sup>
-          </p>
-          <p>
-            <strong>Périmètre :</strong>
-            {{ 4 * carre.cote | number : "1.2-2" }} m
-          </p>
-          <div class="text-center">
-            <button class="btn btn-danger mt-2" (click)="deleteCarre(carre)">Supprimer</button>
-          </div>
+          <p><Strong>Nom :</Strong> {{ carre.nom }}</p>
+          <p><Strong>Couleur :</Strong> {{ carre.couleur }}</p>
+          <p><Strong>a :</Strong> {{ carre.cote }} m</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-
