@@ -12,11 +12,11 @@ export class AppComponent {
   pageTitle: string = "Et la Géométrie devient un jeu d'enfant !"; // Titre par défaut
 
   constructor(private router: Router) {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.setPageTitle();
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.setPageTitle();
+      });
   }
 
   /*Méthode pour ne pas afficher le lien accueil sur la page d'accueil*/
@@ -54,42 +54,41 @@ export class AppComponent {
   }
 
   // Définir le titre de la page en fonction de la route
-private setPageTitle(): void {
-  switch (true) {
-    case this.router.url === '/forme2d' || this.router.url === '/forme3d':
-      this.pageTitle = 'Faites votre choix'; // Titre pour les pages forme2D et forme3D
-      break;
-    case this.router.url.includes('/carre'):
-      this.pageTitle = 'Le Carré';
-      break;
-    case this.router.url.includes('/triangle'):
-      this.pageTitle = 'Le Triangle';
-      break;
-    case this.router.url.includes('/rectangle'):
-      this.pageTitle = 'Le Rectangle';
-      break;
-    case this.router.url.includes('/losange'):
-      this.pageTitle = 'Le Losange';
-      break;
-    case this.router.url.includes('/cercle'):
-      this.pageTitle = 'Le Cercle';
-      break;
-    case this.router.url.includes('/cone'):
-      this.pageTitle = 'Le Cône';
-      break;
-    case this.router.url.includes('/sphere'):
-      this.pageTitle = 'La Sphère';
-      break;
-    case this.router.url.includes('/cylindre'):
-      this.pageTitle = 'Le Cylindre';
-      break;
-    case this.router.url.includes('/cube'):
-      this.pageTitle = 'Le Cube';
-      break;
-    default:
-      this.pageTitle = "Et la Géométrie devient un jeu d'enfant !";  // Titre par défaut si aucune page spécifique n'est trouvée
-      break;
+  private setPageTitle(): void {
+    switch (true) {
+      case this.router.url === '/forme2d' || this.router.url === '/forme3d':
+        this.pageTitle = 'Faites votre choix'; // Titre pour les pages forme2D et forme3D
+        break;
+      case this.router.url.includes('/carre'):
+        this.pageTitle = 'Le Carré';
+        break;
+      case this.router.url.includes('/triangle'):
+        this.pageTitle = 'Le Triangle';
+        break;
+      case this.router.url.includes('/rectangle'):
+        this.pageTitle = 'Le Rectangle';
+        break;
+      case this.router.url.includes('/losange'):
+        this.pageTitle = 'Le Losange';
+        break;
+      case this.router.url.includes('/cercle'):
+        this.pageTitle = 'Le Cercle';
+        break;
+      case this.router.url.includes('/cone'):
+        this.pageTitle = 'Le Cône';
+        break;
+      case this.router.url.includes('/sphere'):
+        this.pageTitle = 'La Sphère';
+        break;
+      case this.router.url.includes('/cylindre'):
+        this.pageTitle = 'Le Cylindre';
+        break;
+      case this.router.url.includes('/cube'):
+        this.pageTitle = 'Le Cube';
+        break;
+      default:
+        this.pageTitle = "Et la Géométrie devient un jeu d'enfant !"; // Titre par défaut si aucune page spécifique n'est trouvée
+        break;
+    }
   }
-}
-
 }

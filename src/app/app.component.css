@@ -1,15 +1,22 @@
 .plastic-film {
-  background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond noire avec 50% de transparence */
-  backdrop-filter: blur(4px); /* Floute l'arrière-plan derrière le film plastique */
-  border-bottom-left-radius: 10px; /* Coins arrondis pour un effet plus doux */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.8
+  ); /* Couleur de fond noire avec 80% de transparence */
+  backdrop-filter: blur(
+    4px
+  ); /* Floute l'arrière-plan derrière le film plastique */
+  border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), /* Ombre externe subtile */
-              inset 0 -3px 8px rgba(255, 255, 255, 0.1); /* Ombre interne pour simuler la profondeur */
-  padding: 20px; /* Espacement interne */
-  color: white; /* Texte en blanc pour un bon contraste */
-  margin: 20px auto; /* Marge autour du conteneur */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3),
+    /* Ombre externe subtile */ inset 0 -3px 8px rgba(255, 255, 255, 0.1); /* Ombre interne pour simuler la profondeur */
+  padding: 20px;
+  color: white;
+  margin: 20px auto;
   width: 100%;
-  text-align: center; /* Centre le texte et les éléments à l'intérieur */
+  text-align: center;
   position: relative; /* Position relative pour les effets enfants */
   overflow: hidden; /* Cache les débordements pour les effets internes */
 }
@@ -30,7 +37,7 @@
     transparent 20px
   ); /* Crée un motif de lignes diagonales subtiles */
   pointer-events: none; /* Rend l'élément insensible aux événements */
-  opacity: 0.8; /* Réduit l'opacité pour adoucir l'effet */
+  opacity: 0.8;
 }
 
 .logo {
@@ -73,28 +80,27 @@ footer {
 }
 
 .footer-icons {
-  display: flex; /* Affiche les icônes sur une ligne */
-  justify-content: center; /* Centrer les icônes */
-  margin-bottom: 10px; /* Espacement entre les icônes et les liens */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 .footer-icons a {
   color: inherit; /* Assure que l'icône utilise la couleur du parent */
-  text-decoration: none; /* Supprime la décoration de texte */
-  margin: 0 10px; /* Espacement entre les icônes */
+  text-decoration: none;
+  margin: 0 10px;
   transition: filter 0.3s ease; /* Transition douce pour l'effet de survol */
-  font-size: 1.5em; /* Taille des icônes */
+  font-size: 1.5em;
 }
 
 .footer-icons a:hover {
   filter: brightness(1.3); /* Éclaircit l'icône à 130% lors du survol */
 }
 
-
 .footer-auth {
-  display: flex; /* Utiliser flexbox pour les liens */
-  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
-  justify-content: center; /* Centrer les liens */
-  color: #FFFFFF;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #ffffff;
 }
 
 .footer-auth a {
@@ -102,17 +108,14 @@ footer {
   border-right: 1px solid #000;
   text-decoration: none;
   color: white;
-  margin: 5px 0; /* Ajouter un espacement vertical entre les liens */
+  margin: 5px 0;
 }
 
 .bg-transparent-black {
   background-color: rgba(0, 0, 0, 0.8); /* Noir avec 80% d'opacité */
-  color: white; /* Texte en blanc pour un bon contraste */
+  color: white;
   padding: 20px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;
 }
-
-
-

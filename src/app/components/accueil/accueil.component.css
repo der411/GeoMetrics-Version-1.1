@@ -8,7 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  font-family: "Quicksand", sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 18px;
   line-height: 1.6;
   color: #333;
@@ -50,7 +50,7 @@
   margin: 10px 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  background-color: #000000;  /* Couleur de fond plus vive #3498db */
+  background-color: #000000; /* Couleur de fond plus vive #3498db */
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -66,9 +66,15 @@
 
 /* Animation de pulsation subtile */
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .container a {
@@ -105,19 +111,16 @@
   z-index: -1; /* Mettre en arrière-plan */
 }
 
-  /* Pour les écrans de taille moyenne (tablettes) */
-  @media (max-width: 1024px) {
-    #three-container {
-      width: 70%;
-    }
+/* Pour les écrans de taille moyenne (tablettes) */
+@media (max-width: 1024px) {
+  #three-container {
+    width: 70%;
   }
-  
-  /* Pour les petits écrans (mobiles) */
-  @media (max-width: 768px) {
-    #three-container {
-      width: 60%;
-    }
-  }
+}
 
- 
-  
+/* Pour les petits écrans (mobiles) */
+@media (max-width: 768px) {
+  #three-container {
+    width: 60%;
+  }
+}
