@@ -1,27 +1,34 @@
-# ProjetFrontend
+# GéoMétrics v1.1, site de calculs géométriques 
+![Angular](https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white&style=for-the-badge)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white&style=for-the-badge)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+Cette application a été générée avec [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3. Les améliorations apportées à cette version comprennent :
 
-## Development server
+- Un design plus attrayant
+  
+- Une adaptabilité aux écrans de toutes tailles
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Une amélioration de l'accessibilité
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clonez le dépôt
+```sh
+ git clone git@github.com:der411/GeoMetrics-Version-1.1.git
+```
 
-## Build
+3. Installez les dépendances
+   ```sh
+   npm install
+   ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+5. Installez Angular CLI globalement si ce n'est pas déjà fait
+   ```sh
+   npm install -g @angular/cli
+   ```
 
-## Running unit tests
+7. Démarrez l'application 🚀
+   ```sh
+   ng serve
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
